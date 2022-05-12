@@ -1,7 +1,7 @@
 FROM php:8.1-apache
 
-RUN apt-get update && apt-get install -y libicu-dev \
+RUN apt-get update && apt-get install -y libicu-dev libpq-dev \
     && docker-php-ext-install intl \
-    && docker-php-ext-install pdo pdo_mysql
+    && docker-php-ext-install pdo pdo_mysql pdo_pgsql
 
 RUN a2enmod rewrite
