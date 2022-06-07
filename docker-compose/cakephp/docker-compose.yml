@@ -1,0 +1,24 @@
+version: '2'
+
+services:
+  mysql:
+    image: mysql:5.7
+    volumes:
+      - ./docker/volumes/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: cakephp
+      MYSQL_USER: dbuser
+      MYSQL_PASSWORD: dbpass
+
+  cakephp:
+    build: ./docker/image/cakephp
+    volumes:
+      - ./app:/var/www/html
+    ports:
+      - 8000:80
+    user: 1000:1000
+    depends_on:
+      - mysql
+    
